@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+body {
+    font-family: "Poppins";
+}
+
+@theme {
+  --color-custom: #06402b;
+}
+
+@layer utilities {
+    .overlay {
+    @apply fixed inset-0 bg-black/30 z-50;
+  }
+}
