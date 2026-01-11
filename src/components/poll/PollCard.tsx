@@ -2,28 +2,74 @@ import UserInfo from "@/components/user/UserInfo";
 import type { PollsWithMeta } from "@/types/pollsWithMeta";
 import { Bookmark, EllipsisVertical } from "lucide-react";
 import { formatDate } from "@/utils/formatDate";
-import { pollTypeComponentMap } from "@/components/poll/poll-types/pollTypeRenderer";
 import { useState } from "react";
+import YesNoPoll from "@/components/poll/poll-types/YesNoPoll";
+import SingleChoicePoll from "@/components/poll/poll-types/SingleChoicePoll";
+import RatingPoll from "@/components/poll/poll-types/RatingPoll";
+import OpenEndedPoll from "@/components/poll/poll-types/OpenEndedPoll";
+import { useMyVotesStore } from "@/store/useMyVotesStore";
+import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
 
 type PollCardProps = {
   poll: PollsWithMeta;
 };
 
 const PollCard = ({ poll }: PollCardProps) => {
-  const { question, createdAt, type, votes, author, id, options } = poll;
+  const { question, createdAt, type, votes, author, authorId, id, options } =
+    poll;
+  const activeUserId = useActiveUserStore((state) => state.activeUserId);
+
   const [selectedValue, setSelectedValue] = useState<
     string | number | boolean | null
-  >("");
+  >(null);
+
+  const myVotes = useMyVotesStore((state) => state.myVotes);
+  const addVote = useMyVotesStore((state) => state.addVote);
 
   if (!author) return null;
 
-  const PollTypeComponent = pollTypeComponentMap[type];
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-  }
+
+    if (!activeUserId) return;
+
+    if (selectedValue !== null) {
+      addVote({ pollId: id, userId: activeUserId, value: selectedValue });
+    }
+  };
 
   console.log(selectedValue);
+  console.log("my votes", myVotes);
+
+  const renderPollInput = () => {
+    switch (type) {
+      case "yes_no":
+        return (
+          <YesNoPoll
+            value={selectedValue as boolean}
+            onAnswerChange={setSelectedValue}
+          />
+        );
+      case "single_choice":
+        return (
+          <SingleChoicePoll
+            value={selectedValue as string}
+            onAnswerChange={setSelectedValue}
+            options={options ?? []}
+          />
+        );
+      case "rating":
+        return <RatingPoll onAnswerChange={setSelectedValue} />;
+
+      case "open_ended":
+        return (
+          <OpenEndedPoll
+            value={(selectedValue as string) ?? ""}
+            onAnswerChange={setSelectedValue}
+          />
+        );
+    }
+  };
 
   return (
     <>
@@ -41,12 +87,10 @@ const PollCard = ({ poll }: PollCardProps) => {
         </div>
       </div>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <p className="mt-4 mb-4">{question}</p>
 
-        {PollTypeComponent && (
-          <PollTypeComponent value={selectedValue} onAnswerChange={setSelectedValue} options={options} />
-        )}
+        {renderPollInput()}
 
         <button className="mt-4 border p-1 px-2 rounded-md text-sm bg-custom text-white cursor-pointer hover:bg-custom/90">
           Bestätigen

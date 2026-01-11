@@ -1,10 +1,16 @@
 import { Outlet } from "react-router";
 import Header from "@/components/layout/Header";
 import Sidebar from "@/components/layout/Sidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
 
 const AppLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const setActiveUserId = useActiveUserStore((state) => state.setActiveUserId);
+
+  useEffect(() => {
+    setActiveUserId("u15");
+  }, [setActiveUserId]);
 
   return (
     <div>
