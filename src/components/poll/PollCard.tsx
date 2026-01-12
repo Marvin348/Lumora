@@ -38,7 +38,6 @@ const PollCard = ({ poll }: PollCardProps) => {
     }
   };
 
-  console.log(selectedValue);
   console.log("my votes", myVotes);
 
   const renderPollInput = () => {
