@@ -7,10 +7,12 @@ import { useSearchPolls } from "@/hooks/useSearchPolls";
 import Filterbar from "@/components/filter/Filterbar";
 import { useFilterStore } from "@/store/filter/useFilterStore";
 import { useFilteredPolls } from "@/hooks/useFilteredPolls";
+import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
 const DashboardPage = () => {
   const { users, polls, votes, isLoading, error } = useDashboardData();
 
   const filter = useFilterStore((state) => state.filter);
+  const bookmark = useBookmarkStore((state) => state.bookmark);
 
   const activeUserId = useActiveUserStore((state) => state.activeUserId);
   const activeUser = users.find((user) => user.id === activeUserId);
@@ -37,6 +39,7 @@ const DashboardPage = () => {
   console.log("enriched", pollsWithMeta);
   console.log("activeUser", activeUser);
   console.log("filter", filter);
+  console.log("bookmark", bookmark);
 
   return (
     <>

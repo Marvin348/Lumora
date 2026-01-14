@@ -10,6 +10,7 @@ import OpenEndedPoll from "@/components/poll/poll-types/OpenEndedPoll";
 import { useMyVotesStore } from "@/store/useMyVotesStore";
 import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
 import { Button } from "@/components/ui/button";
+import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
 
 type PollCardProps = {
   poll: PollsWithMeta;
@@ -19,6 +20,9 @@ const PollCard = ({ poll }: PollCardProps) => {
   const { question, createdAt, type, votes, author, authorId, id, options } =
     poll;
   const activeUserId = useActiveUserStore((state) => state.activeUserId);
+
+  const isBookmarked = useBookmarkStore((state) => state.bookmark.includes(id));
+  const toggleBookmark = useBookmarkStore((state) => state.toggleBookmark);
 
   const [selectedValue, setSelectedValue] = useState<
     string | number | boolean | null
@@ -78,12 +82,20 @@ const PollCard = ({ poll }: PollCardProps) => {
           <UserInfo user={author} />
         </div>
         <div>
-          <button className="cursor-pointer text-slate-800 p-2 rounded-full hover:bg-gray-100">
-            <Bookmark size={20} />
-          </button>
-          <button className="cursor-pointer text-slate-800 p-2 rounded-full hover:bg-gray-100">
-            <EllipsisVertical size={20} />
-          </button>
+          <Button
+            className="border-none shadow-none"
+            size="icon-lg"
+            onClick={() => toggleBookmark(id)}
+          >
+            <Bookmark
+              fill={isBookmarked ? "#06402b" : "none"}
+              stroke={isBookmarked ? "#06402b" : "currentColor"}
+              className="!size-5"
+            />
+          </Button>
+          <Button className="border-none shadow-none" size="icon-lg">
+            <EllipsisVertical className="!size-5" />
+          </Button>
         </div>
       </div>
 
@@ -92,7 +104,10 @@ const PollCard = ({ poll }: PollCardProps) => {
 
         {renderPollInput()}
 
-        <Button className="mt-4 p-2 py-4 border-none rounded-md text-sm bg-custom text-white hover:bg-custom/90 hover:text-white" size="sm">
+        <Button
+          className="mt-4 p-2 py-4 border-none rounded-md text-sm bg-custom text-white hover:bg-custom/90 hover:text-white"
+          size="sm"
+        >
           Bestätigen
         </Button>
       </form>
