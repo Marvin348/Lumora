@@ -4,8 +4,13 @@ import type { PollsWithMeta } from "@/types/pollsWithMeta";
 import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
 import { useSearchStore } from "@/store/search/useSearchStore";
 import { useSearchPolls } from "@/hooks/useSearchPolls";
+import Filterbar from "@/components/filter/Filterbar";
+import { useFilterStore } from "@/store/filter/useFilterStore";
+import { useFilteredPolls } from "@/hooks/useFilteredPolls";
 const DashboardPage = () => {
   const { users, polls, votes, isLoading, error } = useDashboardData();
+
+  const filter = useFilterStore((state) => state.filter);
 
   const activeUserId = useActiveUserStore((state) => state.activeUserId);
   const activeUser = users.find((user) => user.id === activeUserId);
@@ -27,15 +32,20 @@ const DashboardPage = () => {
   });
 
   const searchedPolls = useSearchPolls(searchQuery, pollsWithMeta);
+  const filteredPolls = useFilteredPolls(searchedPolls, filter);
 
   console.log("enriched", pollsWithMeta);
   console.log("activeUser", activeUser);
-  console.log("searchQuery", searchQuery);
+  console.log("filter", filter);
 
   return (
     <>
+      <div className="mb-12">
+        <Filterbar filter={filter} />
+      </div>
+
       <div className="grid grid-cols-1 gap-6">
-        <PollList pollsWithMeta={searchedPolls} />
+        <PollList pollsWithMeta={filteredPolls} />
       </div>
     </>
   );

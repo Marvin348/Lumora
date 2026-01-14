@@ -9,6 +9,7 @@ import RatingPoll from "@/components/poll/poll-types/RatingPoll";
 import OpenEndedPoll from "@/components/poll/poll-types/OpenEndedPoll";
 import { useMyVotesStore } from "@/store/useMyVotesStore";
 import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
+import { Button } from "@/components/ui/button";
 
 type PollCardProps = {
   poll: PollsWithMeta;
@@ -91,9 +92,9 @@ const PollCard = ({ poll }: PollCardProps) => {
 
         {renderPollInput()}
 
-        <button className="mt-4 border p-1 px-2 rounded-md text-sm bg-custom text-white cursor-pointer hover:bg-custom/90">
+        <Button className="mt-4 p-2 py-4 border-none rounded-md text-sm bg-custom text-white hover:bg-custom/90 hover:text-white" size="sm">
           Bestätigen
-        </button>
+        </Button>
       </form>
 
       <p className="text-xs text-slate-600 text-right">

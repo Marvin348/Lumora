@@ -8,7 +8,7 @@ const PollList = ({ pollsWithMeta }: PollListProps) => {
   return (
     <>
       {pollsWithMeta.map((poll) => (
-        <div key={poll.id} className="border border-slate-800 p-4 rounded-md">
+        <div key={poll.id} className="border p-4 rounded-md">
           <PollCard poll={poll} />
         </div>
       ))}
