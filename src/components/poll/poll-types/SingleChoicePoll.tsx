@@ -14,7 +14,7 @@ const SingleChoicePoll = ({
       {options.map((opt) => (
         <label
           key={opt}
-          className="flex items-center gap-4 bg-gray-200 px-2 py-1 rounded-md w-full"
+          className="flex items-center gap-4 bg-gray-200 px-2 py-1 rounded-md w-full cursor-pointer"
         >
           <input
             type="radio"

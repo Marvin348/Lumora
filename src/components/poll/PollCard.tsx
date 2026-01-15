@@ -3,14 +3,12 @@ import type { PollsWithMeta } from "@/types/pollsWithMeta";
 import { Bookmark, EllipsisVertical } from "lucide-react";
 import { formatDate } from "@/utils/formatDate";
 import { useState } from "react";
-import YesNoPoll from "@/components/poll/poll-types/YesNoPoll";
-import SingleChoicePoll from "@/components/poll/poll-types/SingleChoicePoll";
-import RatingPoll from "@/components/poll/poll-types/RatingPoll";
-import OpenEndedPoll from "@/components/poll/poll-types/OpenEndedPoll";
 import { useMyVotesStore } from "@/store/useMyVotesStore";
 import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
 import { Button } from "@/components/ui/button";
 import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
+import PollInput from "@/components/poll/poll-input/PollInput";
+import PollResult from "@/components/poll/poll-results/PollResult";
 
 type PollCardProps = {
   poll: PollsWithMeta;
@@ -31,6 +29,10 @@ const PollCard = ({ poll }: PollCardProps) => {
   const myVotes = useMyVotesStore((state) => state.myVotes);
   const addVote = useMyVotesStore((state) => state.addVote);
 
+  const hasVotes = myVotes.some(
+    (vote) => vote.pollId === id && vote.userId === activeUserId
+  );
+
   if (!author) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -44,36 +46,6 @@ const PollCard = ({ poll }: PollCardProps) => {
   };
 
   console.log("my votes", myVotes);
-
-  const renderPollInput = () => {
-    switch (type) {
-      case "yes_no":
-        return (
-          <YesNoPoll
-            value={selectedValue as boolean}
-            onAnswerChange={setSelectedValue}
-          />
-        );
-      case "single_choice":
-        return (
-          <SingleChoicePoll
-            value={selectedValue as string}
-            onAnswerChange={setSelectedValue}
-            options={options ?? []}
-          />
-        );
-      case "rating":
-        return <RatingPoll onAnswerChange={setSelectedValue} />;
-
-      case "open_ended":
-        return (
-          <OpenEndedPoll
-            value={(selectedValue as string) ?? ""}
-            onAnswerChange={setSelectedValue}
-          />
-        );
-    }
-  };
 
   return (
     <>
@@ -102,7 +74,16 @@ const PollCard = ({ poll }: PollCardProps) => {
       <form onSubmit={handleSubmit}>
         <p className="mt-4 mb-4">{question}</p>
 
-        {renderPollInput()}
+        {!hasVotes ? (
+          <PollInput
+            value={selectedValue}
+            onChange={setSelectedValue}
+            type={type}
+            options={options}
+          />
+        ) : (
+          <PollResult poll={poll} />
+        )}
 
         <Button
           className="mt-4 p-2 py-4 border-none rounded-md text-sm bg-custom text-white hover:bg-custom/90 hover:text-white"
