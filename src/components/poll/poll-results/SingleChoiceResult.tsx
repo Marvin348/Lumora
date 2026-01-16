@@ -1,5 +1,5 @@
 import type { Vote } from "@/types/vote";
-import { getSingleChoiceResult } from "@/utils/getSingleChoiceResult";
+import { getSingleChoiceResult } from "@/utils/results/getSingleChoiceResult";
 
 type SingleChoiceResultProps = {
   votes: Vote[];

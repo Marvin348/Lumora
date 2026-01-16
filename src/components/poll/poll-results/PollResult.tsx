@@ -18,7 +18,7 @@ const PollResult = ({ poll }: PollResultProps) => {
       return <SingleChoiceResult votes={votes} options={options ?? []} />;
 
     case "rating":
-      return <RatingResult />;
+      return <RatingResult votes={votes} />;
 
     case "open_ended":
       return <OpenEndedResult />;

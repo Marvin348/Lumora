@@ -11,5 +11,11 @@ export const mockVotes: Vote[] = [
   { pollId: "p3", userId: "u2", value: "Weihnachten" },
   { pollId: "p3", userId: "u4", value: "Ostern" },
   { pollId: "p3", userId: "u10", value: "Silvester" },
-  { pollId: "p3", userId: "u12", value: "Ostern" },
+  { pollId: "p3", userId: "u10", value: "Ostern" },
+  { pollId: "p4", userId: "u1", value: 3 },
+  { pollId: "p4", userId: "u11", value: 2 },
+  { pollId: "p4", userId: "u6", value: 1 },
+  { pollId: "p4", userId: "u2", value: 1 },
+  { pollId: "p4", userId: "u4", value: 3 },
+  { pollId: "p4", userId: "u12", value: 1 },
 ];
