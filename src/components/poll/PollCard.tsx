@@ -71,7 +71,7 @@ const PollCard = ({ poll }: PollCardProps) => {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="mb-4">
         <p className="mt-4 mb-4">{question}</p>
 
         {!hasVotes ? (
@@ -85,12 +85,14 @@ const PollCard = ({ poll }: PollCardProps) => {
           <PollResult poll={poll} />
         )}
 
-        <Button
-          className="mt-4 p-2 py-4 border-none rounded-md text-sm bg-custom text-white hover:bg-custom/90 hover:text-white"
-          size="sm"
-        >
-          Bestätigen
-        </Button>
+        {!hasVotes && (
+          <Button
+            className="mt-4 p-2 py-4 border-none rounded-md text-sm bg-custom text-white hover:bg-custom/90 hover:text-white"
+            size="sm"
+          >
+            Bestätigen
+          </Button>
+        )}
       </form>
 
       <p className="text-xs text-slate-600 text-right">

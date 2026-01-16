@@ -13,10 +13,10 @@ const RatingPoll = ({ onAnswerChange, }: RatingPollProps) => {
         <button
           key={r}
           type="button"
-          className="transition duration-200 ease-in-out text-slate-800 cursor-pointer hover:text-yellow-300"
+          className="transition duration-200 ease-in-out text-slate-800 cursor-pointer "
           onClick={() => onAnswerChange(r)}
         >
-          <Star />
+          <Star fill="#ffdf20" stroke={"currentColor"} />
         </button>
       ))}
     </div>

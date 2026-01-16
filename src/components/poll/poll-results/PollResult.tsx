@@ -9,13 +9,13 @@ type PollResultProps = {
 };
 
 const PollResult = ({ poll }: PollResultProps) => {
-  const { type, author, votes } = poll;
+  const { type, author, votes, options } = poll;
   switch (type) {
     case "yes_no":
       return <YesNoResult votes={votes} />;
 
     case "single_choice":
-      return <SingleChoiceResult />;
+      return <SingleChoiceResult votes={votes} options={options ?? []} />;
 
     case "rating":
       return <RatingResult />;

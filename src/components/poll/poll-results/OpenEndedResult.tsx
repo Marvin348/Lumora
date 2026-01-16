@@ -2,7 +2,7 @@ import UserInfo from "@/components/user/UserInfo";
 
 
 type OpenEndedResultProps = {
-
+  
 }
 
 const OpenEndedResult = () => {
