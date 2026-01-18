@@ -9,13 +9,16 @@ import { Button } from "@/components/ui/button";
 import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
 import PollInput from "@/components/poll/poll-input/PollInput";
 import PollResult from "@/components/poll/poll-results/PollResult";
+import OpenEndedComments from "./OpenEndedComments";
+import type { User } from "@/types/user";
 
 type PollCardProps = {
   poll: PollsWithMeta;
+  users: User[];
 };
 
-const PollCard = ({ poll }: PollCardProps) => {
-  const { question, createdAt, type, votes, author, authorId, id, options } =
+const PollCard = ({ poll, users }: PollCardProps) => {
+  const { question, createdAt, type, votes, author, id, options } =
     poll;
   const activeUserId = useActiveUserStore((state) => state.activeUserId);
 
@@ -30,7 +33,7 @@ const PollCard = ({ poll }: PollCardProps) => {
   const addVote = useMyVotesStore((state) => state.addVote);
 
   const hasVotes = myVotes.some(
-    (vote) => vote.pollId === id && vote.userId === activeUserId
+    (vote) => vote.pollId === id && vote.userId === activeUserId,
   );
 
   if (!author) return null;
@@ -94,6 +97,10 @@ const PollCard = ({ poll }: PollCardProps) => {
           </Button>
         )}
       </form>
+
+      {type === "open_ended" && (
+        <OpenEndedComments users={users} votes={votes} />
+      )}
 
       <p className="text-xs text-slate-600 text-right">
         {formatDate(createdAt)}

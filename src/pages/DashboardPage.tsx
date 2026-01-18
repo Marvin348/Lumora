@@ -48,7 +48,7 @@ const DashboardPage = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-6">
-        <PollList pollsWithMeta={filteredPolls} />
+        <PollList pollsWithMeta={filteredPolls} users={users} />
       </div>
     </>
   );

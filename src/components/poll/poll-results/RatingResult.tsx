@@ -21,13 +21,13 @@ const RatingResult = ({ votes }: RatingResultProps) => {
 
   const ratingStats = getRatingResult(rating, votes);
 
-  console.log(ratingStats);
+  // console.log(ratingStats);
 
-  console.log(
-    ratingStats.map((ra) =>
-      [...Array(ra.rating)].map((_, i) => <div key={i}>test</div>)
-    )
-  );
+  // console.log(
+  //   ratingStats.map((ra) =>
+  //     [...Array(ra.rating)].map((_, i) => <div key={i}>test</div>)
+  //   )
+  // );
 
   return (
     <div className="flex flex-col gap-2">
