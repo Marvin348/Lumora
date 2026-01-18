@@ -14,12 +14,13 @@ const YesNoPoll = ({ onAnswerChange, value }: YesNoPollProps) => {
       {YES_NO_OPTIONS.map((opt) => (
         <label
           key={opt.label}
-          className="flex items-center gap-4 bg-gray-200 px-2 py-1 rounded-md w-full"
+          className="poll-label"
         >
           <input
             type="radio"
             checked={value === opt.value}
             onChange={() => onAnswerChange(opt.value)}
+            className="radio-btn"
           />
           {opt.label}
         </label>

@@ -15,6 +15,12 @@ body {
   .overlay {
     @apply fixed inset-0 bg-black/30 z-50;
   }
+  .radio-btn {
+    @apply accent-custom checked:scale-120 transition-all duration-150;
+  }
+  .poll-label {
+    @apply flex items-center gap-4 bg-gray-200 px-2 py-1 rounded-md w-full cursor-pointer;
+  }
 }
 
 @theme inline {

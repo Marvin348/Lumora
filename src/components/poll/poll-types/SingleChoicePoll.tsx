@@ -14,12 +14,13 @@ const SingleChoicePoll = ({
       {options.map((opt) => (
         <label
           key={opt}
-          className="flex items-center gap-4 bg-gray-200 px-2 py-1 rounded-md w-full cursor-pointer"
+          className="poll-label"
         >
           <input
             type="radio"
             checked={value === opt}
             onChange={() => onAnswerChange(opt)}
+            className="radio-btn"
           />
           {opt}
         </label>

@@ -26,7 +26,7 @@ const PollInput = ({ type, value, onChange, options }: PollInputProps) => {
       );
 
     case "rating":
-      return <RatingPoll onAnswerChange={onChange} />;
+      return <RatingPoll onAnswerChange={onChange} value={value as number} />;
 
     case "open_ended":
       return (

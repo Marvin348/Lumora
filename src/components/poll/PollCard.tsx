@@ -56,7 +56,7 @@ const PollCard = ({ poll, users }: PollCardProps) => {
         <div className="flex items-center gap-2">
           <UserInfo user={author} />
         </div>
-        <div>
+        <div className="flex items-center">
           <Button
             className="border-none shadow-none"
             size="icon-lg"
