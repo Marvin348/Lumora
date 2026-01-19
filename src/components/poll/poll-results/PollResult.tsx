@@ -8,7 +8,7 @@ type PollResultProps = {
 };
 
 const PollResult = ({ poll }: PollResultProps) => {
-  const { type, author, votes, options, createdAt } = poll;
+  const { type, votes, options, } = poll;
   switch (type) {
     case "yes_no":
       return <YesNoResult votes={votes} />;
