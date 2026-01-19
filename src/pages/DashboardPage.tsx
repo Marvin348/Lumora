@@ -8,8 +8,10 @@ import Filterbar from "@/components/filter/Filterbar";
 import { useFilterStore } from "@/store/filter/useFilterStore";
 import { useFilteredPolls } from "@/hooks/useFilteredPolls";
 import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
+import { useVotesStore } from "@/store/votes/useVotesStore";
 const DashboardPage = () => {
-  const { users, polls, votes, isLoading, error } = useDashboardData();
+  const { users, polls, isLoading, error } = useDashboardData();
+  const votes = useVotesStore((state) => state.votes);
 
   const filter = useFilterStore((state) => state.filter);
   const bookmark = useBookmarkStore((state) => state.bookmark);

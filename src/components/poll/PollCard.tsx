@@ -3,7 +3,7 @@ import type { PollsWithMeta } from "@/types/pollsWithMeta";
 import { Bookmark, EllipsisVertical } from "lucide-react";
 import { formatDate } from "@/utils/formatDate";
 import { useState } from "react";
-import { useMyVotesStore } from "@/store/useMyVotesStore";
+import { useVotesStore } from "@/store/votes/useVotesStore";
 import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
 import { Button } from "@/components/ui/button";
 import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
@@ -29,10 +29,9 @@ const PollCard = ({ poll, users }: PollCardProps) => {
     string | number | boolean | null
   >(null);
 
-  const myVotes = useMyVotesStore((state) => state.myVotes);
-  const addVote = useMyVotesStore((state) => state.addVote);
+  const addVote = useVotesStore((state) => state.addVote);
 
-  const hasVotes = myVotes.some(
+  const hasVotes = votes.some(
     (vote) => vote.pollId === id && vote.userId === activeUserId,
   );
 
@@ -48,7 +47,7 @@ const PollCard = ({ poll, users }: PollCardProps) => {
     }
   };
 
-  console.log("my votes", myVotes);
+  // console.log("ALL votes", votes);
 
   return (
     <>
