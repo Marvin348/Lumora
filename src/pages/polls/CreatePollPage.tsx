@@ -45,6 +45,7 @@ const CreatePollPage = () => {
         options: optionDraft,
       });
     }
+    setQuestionInput("");
   };
 
   const disabled = selectedType === "single_choice" && optionDraft.length < 2;

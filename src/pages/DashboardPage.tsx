@@ -9,8 +9,10 @@ import { useFilterStore } from "@/store/filter/useFilterStore";
 import { useFilteredPolls } from "@/hooks/useFilteredPolls";
 import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
 import { useVotesStore } from "@/store/votes/useVotesStore";
+import { usePollsStore } from "@/store/polls/usePollsStore";
 const DashboardPage = () => {
-  const { users, polls, isLoading, error } = useDashboardData();
+  const { users, isLoading, error } = useDashboardData();
+  const polls = usePollsStore((state) => state.polls);
   const votes = useVotesStore((state) => state.votes);
 
   const filter = useFilterStore((state) => state.filter);
