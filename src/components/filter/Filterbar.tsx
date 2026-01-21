@@ -1,4 +1,4 @@
-import { FILTER_OPTIONS } from "@/constants/filter-options";
+import { POLL_TYPE_OPTIONS } from "@/constants/filter-options";
 import { Funnel } from "lucide-react";
 import { useState } from "react";
 import { useFilterStore, type Filter } from "@/store/filter/useFilterStore";
@@ -38,7 +38,7 @@ const Filterbar = ({ filter }: FilterbarProps) => {
           >
             Alle
           </Button>
-          {FILTER_OPTIONS.map((opt) => (
+          {POLL_TYPE_OPTIONS.map((opt) => (
             <Button
               key={opt.value}
               onClick={() => setFilter({ category: opt.value })}

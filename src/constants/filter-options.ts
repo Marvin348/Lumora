@@ -1,6 +1,6 @@
 import type { PollType } from "@/types/pollType";
 
-export const FILTER_OPTIONS: {
+export const POLL_TYPE_OPTIONS: {
   label: string;
   value: PollType;
 }[] = [
