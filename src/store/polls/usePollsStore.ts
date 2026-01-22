@@ -14,6 +14,7 @@ type PollInput = {
 type PollsStore = {
   polls: Poll[];
   createPoll: (input: PollInput) => void;
+  deletePoll: (id: string) => void;
 };
 
 export const usePollsStore = create<PollsStore>()(
@@ -35,6 +36,11 @@ export const usePollsStore = create<PollsStore>()(
             polls: [...state.polls, newPoll],
           };
         }),
+        
+      deletePoll: (id) =>
+        set((state) => ({
+          polls: state.polls.filter((poll) => poll.id !== id),
+        })),
     }),
     {
       name: "polls",

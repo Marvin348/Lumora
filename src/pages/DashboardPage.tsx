@@ -1,6 +1,4 @@
 import PollList from "@/components/poll/PollList";
-import { useDashboardData } from "@/hooks/useDashboardData";
-import type { PollsWithMeta } from "@/types/pollsWithMeta";
 import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
 import { useSearchStore } from "@/store/search/useSearchStore";
 import { useSearchPolls } from "@/hooks/useSearchPolls";
@@ -10,32 +8,28 @@ import { useFilteredPolls } from "@/hooks/useFilteredPolls";
 import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
 import { useVotesStore } from "@/store/votes/useVotesStore";
 import { usePollsStore } from "@/store/polls/usePollsStore";
+import { useUsers } from "@/hooks/useUsers";
+import { usePollsWithMeta } from "@/hooks/usePollsWithMeta";
 const DashboardPage = () => {
-  const { users, isLoading, error } = useDashboardData();
+  const { data: users, isLoading, error } = useUsers();
+
   const polls = usePollsStore((state) => state.polls);
+  const pollsWithMeta = usePollsWithMeta(polls, users ?? []);
+
   const votes = useVotesStore((state) => state.votes);
 
   const filter = useFilterStore((state) => state.filter);
   const bookmark = useBookmarkStore((state) => state.bookmark);
 
   const activeUserId = useActiveUserStore((state) => state.activeUserId);
-  const activeUser = users.find((user) => user.id === activeUserId);
+  const activeUser = users?.find((user) => user.id === activeUserId);
 
   const searchQuery = useSearchStore((state) => state.searchQuery);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
-
-  const pollsWithMeta: PollsWithMeta[] = polls?.map((poll) => {
-    const author = users?.find((user) => poll.authorId === user.id);
-    const matchingVotes = votes?.filter((vote) => poll.id === vote.pollId);
-
-    return {
-      ...poll,
-      author,
-      votes: matchingVotes,
-    };
-  });
+  if (!users) return [];
+  console.log(users);
 
   const searchedPolls = useSearchPolls(searchQuery, pollsWithMeta);
   const filteredPolls = useFilteredPolls(searchedPolls, filter);

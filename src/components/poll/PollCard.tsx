@@ -11,6 +11,8 @@ import PollInput from "@/components/poll/poll-input/PollInput";
 import PollResult from "@/components/poll/poll-results/PollResult";
 import OpenEndedComments from "./OpenEndedComments";
 import type { User } from "@/types/user";
+import PollDropdown from "@/components/poll/PollDropdown";
+import { usePollsStore } from "@/store/polls/usePollsStore";
 
 type PollCardProps = {
   poll: PollsWithMeta;
@@ -18,9 +20,11 @@ type PollCardProps = {
 };
 
 const PollCard = ({ poll, users }: PollCardProps) => {
-  const { question, createdAt, type, votes, author, id, options } =
-    poll;
+  const { question, createdAt, type, votes, author, id, options } = poll;
+  const [openDropdown, setOpenDropdown] = useState(false);
   const activeUserId = useActiveUserStore((state) => state.activeUserId);
+
+  const deletePolls = usePollsStore((state) => state.deletePoll);
 
   const isBookmarked = useBookmarkStore((state) => state.bookmark.includes(id));
   const toggleBookmark = useBookmarkStore((state) => state.toggleBookmark);
@@ -30,6 +34,8 @@ const PollCard = ({ poll, users }: PollCardProps) => {
   >(null);
 
   const addVote = useVotesStore((state) => state.addVote);
+
+  const isMyPoll = poll.authorId === activeUserId;
 
   const hasVotes = votes.some(
     (vote) => vote.pollId === id && vote.userId === activeUserId,
@@ -47,15 +53,15 @@ const PollCard = ({ poll, users }: PollCardProps) => {
     }
   };
 
-  // console.log("ALL votes", votes);
 
   return (
     <>
-      <div className="flex justify-between items-center gap-4">
+      <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <UserInfo user={author} />
         </div>
-        <div className="flex items-center">
+
+        <div className="relative flex items-center">
           <Button
             className="border-none shadow-none"
             size="icon-lg"
@@ -67,9 +73,20 @@ const PollCard = ({ poll, users }: PollCardProps) => {
               className="!size-5"
             />
           </Button>
-          <Button className="border-none shadow-none" size="icon-lg">
+          <Button
+            className="border-none shadow-none"
+            size="icon-lg"
+            onClick={() => setOpenDropdown((prev) => !prev)}
+          >
             <EllipsisVertical className="!size-5" />
           </Button>
+
+          {openDropdown && (
+            <PollDropdown
+              canDelete={isMyPoll}
+              onDelete={() => deletePolls(id)}
+            />
+          )}
         </div>
       </div>
 
