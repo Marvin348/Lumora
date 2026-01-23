@@ -6,14 +6,14 @@ export const mockPolls: Poll[] = [
     authorId: "u1",
     question: "Soll Homeoffice Pflicht sein?",
     type: "yes_no",
-    createdAt: "2025-01-01",
+    createdAt: "2026-01-01",
   },
   {
     id: "p2",
     authorId: "u2",
     question: "Meinung zum neuen Chef?",
     type: "open_ended",
-    createdAt: "2025-01-01",
+    createdAt: "2026-01-01",
   },
   {
     id: "p3",
@@ -21,13 +21,13 @@ export const mockPolls: Poll[] = [
     question: "Was ist dein lieblings Feiertag?",
     type: "single_choice",
     options: ["Ostern", "Weihnachten", "Silvester", "Test"],
-    createdAt: "2025-01-01",
+    createdAt: "2026-01-01",
   },
   {
     id: "p4",
     authorId: "u4",
     question: "Wie zufrieden bist du mit dem Team?",
     type: "rating",
-    createdAt: "2025-01-02",
+    createdAt: "2026-01-02",
   },
 ];

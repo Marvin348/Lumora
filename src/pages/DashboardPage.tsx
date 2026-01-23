@@ -10,6 +10,8 @@ import { useVotesStore } from "@/store/votes/useVotesStore";
 import { usePollsStore } from "@/store/polls/usePollsStore";
 import { useUsers } from "@/hooks/useUsers";
 import { usePollsWithMeta } from "@/hooks/usePollsWithMeta";
+import { Spinner } from "@/components/ui/spinner";
+import { useSortedPolls } from "@/hooks/useSortedPolls";
 const DashboardPage = () => {
   const { data: users, isLoading, error } = useUsers();
 
@@ -26,12 +28,13 @@ const DashboardPage = () => {
 
   const searchQuery = useSearchStore((state) => state.searchQuery);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Spinner />;
   if (error) return <div>Error</div>;
   if (!users) return [];
   console.log(users);
 
-  const searchedPolls = useSearchPolls(searchQuery, pollsWithMeta);
+  const sortedPolls = useSortedPolls(pollsWithMeta);
+  const searchedPolls = useSearchPolls(searchQuery, sortedPolls);
   const filteredPolls = useFilteredPolls(searchedPolls, filter);
 
   console.log("enriched", pollsWithMeta);

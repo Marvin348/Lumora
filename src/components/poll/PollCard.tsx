@@ -13,6 +13,7 @@ import OpenEndedComments from "./OpenEndedComments";
 import type { User } from "@/types/user";
 import PollDropdown from "@/components/poll/PollDropdown";
 import { usePollsStore } from "@/store/polls/usePollsStore";
+import { useTimeAgo } from "@/hooks/useTimeAgo";
 
 type PollCardProps = {
   poll: PollsWithMeta;
@@ -41,6 +42,9 @@ const PollCard = ({ poll, users }: PollCardProps) => {
     (vote) => vote.pollId === id && vote.userId === activeUserId,
   );
 
+  const timeAgo = useTimeAgo(createdAt);
+  console.log(timeAgo);
+
   if (!author) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -52,7 +56,6 @@ const PollCard = ({ poll, users }: PollCardProps) => {
       addVote({ pollId: id, userId: activeUserId, value: selectedValue });
     }
   };
-
 
   return (
     <>
@@ -118,9 +121,7 @@ const PollCard = ({ poll, users }: PollCardProps) => {
         <OpenEndedComments users={users} votes={votes} />
       )}
 
-      <p className="text-xs text-slate-600 text-right">
-        {formatDate(createdAt)}
-      </p>
+      <p className="mt-2 text-right text-xs text-muted-foreground">{timeAgo}</p>
     </>
   );
 };

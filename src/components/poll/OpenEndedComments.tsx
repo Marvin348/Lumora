@@ -43,9 +43,13 @@ const OpenEndedComments = ({ users, votes }: OpenEndedCommentsProps) => {
       </button>
       {showComments && (
         <>
+          {visibleComments.length === 0 && (
+            <p className="text-xs text-muted-foreground">Keine Kommentare</p>
+          )}
+
           <div>
             {visibleComments.map((vo) => (
-              <div key={vo.userId} className="my-8">
+              <div key={vo.userId} className="mt-8">
                 <div className="flex items-center gap-2">
                   <UserInfo user={vo.user} />
                 </div>
@@ -60,7 +64,7 @@ const OpenEndedComments = ({ users, votes }: OpenEndedCommentsProps) => {
                 setVisibleCount((prev) => prev + COMMENTS_PER_PAGE)
               }
             >
-              Mehr Kommentare anzeigen
+              Mehr anzeigen
             </button>
           )}
         </>

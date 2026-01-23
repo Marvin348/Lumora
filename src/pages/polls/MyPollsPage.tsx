@@ -6,6 +6,7 @@ import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
 import { useFilterStore } from "@/store/filter/useFilterStore";
 import Filterbar from "@/components/filter/Filterbar";
 import { useFilteredPolls } from "@/hooks/useFilteredPolls";
+import { useSortedPolls } from "@/hooks/useSortedPolls";
 const MyPollsPage = () => {
   const { data: users, isLoading, error } = useUsers();
 
@@ -17,7 +18,8 @@ const MyPollsPage = () => {
   const myPolls = polls.filter((poll) => poll.authorId === activeUserId);
 
   const pollsWithMeta = usePollsWithMeta(myPolls, users ?? []);
-  const filteredPolls = useFilteredPolls(pollsWithMeta, filter);
+  const sortedPolls = useSortedPolls(pollsWithMeta);
+  const filteredPolls = useFilteredPolls(sortedPolls, filter);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
