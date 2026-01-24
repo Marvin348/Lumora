@@ -31,7 +31,6 @@ const DashboardPage = () => {
   if (isLoading) return <Spinner />;
   if (error) return <div>Error</div>;
   if (!users) return [];
-  console.log(users);
 
   const sortedPolls = useSortedByDate(pollsWithMeta);
   const searchedPolls = useSearchPolls(searchQuery, sortedPolls);

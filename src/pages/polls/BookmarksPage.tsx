@@ -28,6 +28,8 @@ const BookmarksPage = () => {
 
   return (
     <>
+     <h2 className="mb-6 text-2xl font-semibold">Gespeichert</h2>
+
       <div className="grid grid-cols-1 gap-6">
         <PollList pollsWithMeta={sortedPolls} users={users} />
       </div>

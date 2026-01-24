@@ -29,6 +29,7 @@ const MyPollsPage = () => {
 
   return (
     <>
+    <h2 className="mb-6 text-2xl font-semibold">Meine Umfragen</h2>
       <div className="mb-12">
         <Filterbar filter={filter} />
       </div>
