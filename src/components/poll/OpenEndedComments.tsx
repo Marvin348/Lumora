@@ -5,6 +5,8 @@ import { useState } from "react";
 import UserInfo from "@/components/user/UserInfo";
 import type { VotesWithUser } from "@/types/votesWithUser";
 import { useOpenEndedComments } from "@/hooks/useOpenEndedComments";
+import { getTimeAgo } from "@/utils/getTimeAgo";
+import { useSortedByDate } from "@/hooks/useSortedByDate";
 
 type OpenEndedCommentsProps = {
   users: User[];
@@ -24,8 +26,10 @@ const OpenEndedComments = ({ users, votes }: OpenEndedCommentsProps) => {
     };
   });
 
+  const sortedComments = useSortedByDate(votesWithUser)
+
   const { visibleCount, setVisibleCount, visibleComments, COMMENTS_PER_PAGE } =
-    useOpenEndedComments(votesWithUser);
+    useOpenEndedComments(sortedComments);
 
   console.log("votesWithUser", votesWithUser);
 
@@ -48,14 +52,20 @@ const OpenEndedComments = ({ users, votes }: OpenEndedCommentsProps) => {
           )}
 
           <div>
-            {visibleComments.map((vo) => (
-              <div key={vo.userId} className="mt-8">
-                <div className="flex items-center gap-2">
-                  <UserInfo user={vo.user} />
+            {visibleComments.map((vo) => {
+              const timeAgo = getTimeAgo(vo.createdAt);
+
+              return (
+                <div key={vo.userId} className="mt-8">
+                  <div className="flex items-center gap-2">
+                    <UserInfo user={vo.user} />
+                  </div>
+
+                  <p className="mt-2 text-sm ">{vo.value}</p>
+                  <p className="text-xs text-muted-foreground">{timeAgo}</p>
                 </div>
-                <p className="text-sm mt-2">{vo.value}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
           {visibleCount < votesWithUser.length && (
             <button

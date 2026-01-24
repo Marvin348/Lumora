@@ -1,9 +1,9 @@
-export const useTimeAgo = (createdAt: string) => {
+export const getTimeAgo = (createdAt: string) => {
   const now = new Date();
 
-  const arrayDate = new Date(createdAt);
+  const voteDate = new Date(createdAt);
 
-  const diffInMs = now.getTime() - arrayDate.getTime();
+  const diffInMs = now.getTime() - voteDate.getTime();
 
   const seconds = Math.floor(diffInMs / 1000);
   const minutes = Math.floor(seconds / 60);

@@ -5,7 +5,7 @@ import { usePollsStore } from "@/store/polls/usePollsStore";
 import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
 import EmptyState from "@/components/EmptyState";
 import { Spinner } from "@/components/ui/spinner";
-import { useSortedPolls } from "@/hooks/useSortedPolls";
+import { useSortedByDate } from "@/hooks/useSortedByDate";
 
 const BookmarksPage = () => {
   const { data: users, isLoading, error } = useUsers();
@@ -15,9 +15,9 @@ const BookmarksPage = () => {
   const bookmarkedPolls = polls.filter((poll) => bookmark.includes(poll.id));
 
   const pollsWithMeta = usePollsWithMeta(bookmarkedPolls, users ?? []);
-  const sortedPolls = useSortedPolls(pollsWithMeta);
+  const sortedPolls = useSortedByDate(pollsWithMeta);
 
-  if (isLoading) return <Spinner/>;
+  if (isLoading) return <Spinner />;
   if (error) return <div>Error</div>;
   if (!users) return [];
 

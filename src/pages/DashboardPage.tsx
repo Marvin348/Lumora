@@ -11,7 +11,7 @@ import { usePollsStore } from "@/store/polls/usePollsStore";
 import { useUsers } from "@/hooks/useUsers";
 import { usePollsWithMeta } from "@/hooks/usePollsWithMeta";
 import { Spinner } from "@/components/ui/spinner";
-import { useSortedPolls } from "@/hooks/useSortedPolls";
+import { useSortedByDate } from "@/hooks/useSortedByDate";
 const DashboardPage = () => {
   const { data: users, isLoading, error } = useUsers();
 
@@ -33,7 +33,7 @@ const DashboardPage = () => {
   if (!users) return [];
   console.log(users);
 
-  const sortedPolls = useSortedPolls(pollsWithMeta);
+  const sortedPolls = useSortedByDate(pollsWithMeta);
   const searchedPolls = useSearchPolls(searchQuery, sortedPolls);
   const filteredPolls = useFilteredPolls(searchedPolls, filter);
 

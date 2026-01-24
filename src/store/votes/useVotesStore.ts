@@ -3,9 +3,15 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { Vote } from "@/types/vote";
 
+type VoteInput = {
+  pollId: string;
+  userId: string;
+  value: string | number | boolean;
+};
+
 type VotesStore = {
   votes: Vote[];
-  addVote: (vote: Vote) => void;
+  addVote: (vote: VoteInput) => void;
 };
 
 export const useVotesStore = create<VotesStore>()(
@@ -20,11 +26,15 @@ export const useVotesStore = create<VotesStore>()(
 
           if (exists) return state;
 
+          const newVote = {
+            pollId: vote.pollId,
+            userId: vote.userId,
+            value: vote.value,
+            createdAt: new Date().toISOString(),
+          };
+
           return {
-            votes: [
-              ...state.votes,
-              { pollId: vote.pollId, userId: vote.userId, value: vote.value },
-            ],
+            votes: [...state.votes, newVote],
           };
         }),
     }),

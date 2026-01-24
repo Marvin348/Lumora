@@ -1,7 +1,6 @@
 import UserInfo from "@/components/user/UserInfo";
 import type { PollsWithMeta } from "@/types/pollsWithMeta";
 import { Bookmark, EllipsisVertical } from "lucide-react";
-import { formatDate } from "@/utils/formatDate";
 import { useState } from "react";
 import { useVotesStore } from "@/store/votes/useVotesStore";
 import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
@@ -13,7 +12,7 @@ import OpenEndedComments from "./OpenEndedComments";
 import type { User } from "@/types/user";
 import PollDropdown from "@/components/poll/PollDropdown";
 import { usePollsStore } from "@/store/polls/usePollsStore";
-import { useTimeAgo } from "@/hooks/useTimeAgo";
+import { getTimeAgo } from "@/utils/getTimeAgo";
 
 type PollCardProps = {
   poll: PollsWithMeta;
@@ -42,7 +41,7 @@ const PollCard = ({ poll, users }: PollCardProps) => {
     (vote) => vote.pollId === id && vote.userId === activeUserId,
   );
 
-  const timeAgo = useTimeAgo(createdAt);
+  const timeAgo = getTimeAgo(createdAt);
   console.log(timeAgo);
 
   if (!author) return null;
