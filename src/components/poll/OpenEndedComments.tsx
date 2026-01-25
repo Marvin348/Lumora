@@ -31,7 +31,7 @@ const OpenEndedComments = ({ users, votes }: OpenEndedCommentsProps) => {
   const { visibleCount, setVisibleCount, visibleComments, COMMENTS_PER_PAGE } =
     useOpenEndedComments(sortedComments);
 
-  console.log("votesWithUser", votesWithUser);
+  // console.log("votesWithUser", votesWithUser);
 
   return (
     <>
@@ -56,7 +56,7 @@ const OpenEndedComments = ({ users, votes }: OpenEndedCommentsProps) => {
               const timeAgo = getTimeAgo(vo.createdAt);
 
               return (
-                <div key={vo.userId} className="mt-8">
+                <div key={vo.userId} className="mt-8 mb-4">
                   <div className="flex items-center gap-2">
                     <UserInfo user={vo.user} />
                   </div>
@@ -69,7 +69,7 @@ const OpenEndedComments = ({ users, votes }: OpenEndedCommentsProps) => {
           </div>
           {visibleCount < votesWithUser.length && (
             <button
-              className="text-gray-800 text-xs"
+              className="text-gray-800 text-xs underline"
               onClick={() =>
                 setVisibleCount((prev) => prev + COMMENTS_PER_PAGE)
               }

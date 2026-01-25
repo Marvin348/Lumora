@@ -8,12 +8,12 @@ import { useFilteredPolls } from "@/hooks/useFilteredPolls";
 import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
 import { useVotesStore } from "@/store/votes/useVotesStore";
 import { usePollsStore } from "@/store/polls/usePollsStore";
-import { useUsers } from "@/hooks/useUsers";
 import { usePollsWithMeta } from "@/hooks/usePollsWithMeta";
-import { Spinner } from "@/components/ui/spinner";
 import { useSortedByDate } from "@/hooks/useSortedByDate";
+import { useUsersContext } from "@/context/useUserContext";
+
 const DashboardPage = () => {
-  const { data: users, isLoading, error } = useUsers();
+  const users = useUsersContext();
 
   const polls = usePollsStore((state) => state.polls);
   const pollsWithMeta = usePollsWithMeta(polls, users ?? []);
@@ -27,10 +27,6 @@ const DashboardPage = () => {
   const activeUser = users?.find((user) => user.id === activeUserId);
 
   const searchQuery = useSearchStore((state) => state.searchQuery);
-
-  if (isLoading) return <Spinner />;
-  if (error) return <div>Error</div>;
-  if (!users) return [];
 
   const sortedPolls = useSortedByDate(pollsWithMeta);
   const searchedPolls = useSearchPolls(searchQuery, sortedPolls);

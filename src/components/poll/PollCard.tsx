@@ -24,6 +24,7 @@ const PollCard = ({ poll, users }: PollCardProps) => {
   const [openDropdown, setOpenDropdown] = useState(false);
   const activeUserId = useActiveUserStore((state) => state.activeUserId);
 
+  const addVote = useVotesStore((state) => state.addVote);
   const deletePolls = usePollsStore((state) => state.deletePoll);
 
   const isBookmarked = useBookmarkStore((state) => state.bookmark.includes(id));
@@ -33,16 +34,19 @@ const PollCard = ({ poll, users }: PollCardProps) => {
     string | number | boolean | null
   >(null);
 
-  const addVote = useVotesStore((state) => state.addVote);
-
   const isMyPoll = poll.authorId === activeUserId;
 
   const hasVotes = votes.some(
     (vote) => vote.pollId === id && vote.userId === activeUserId,
   );
 
-  const timeAgo = getTimeAgo(createdAt);
-  console.log(timeAgo);
+  const pollTimeAgo = getTimeAgo(createdAt);
+  const myVote = votes.find((vote) => vote.userId === activeUserId);
+  const voteTimeAgo = myVote ? getTimeAgo(myVote?.createdAt) : null;
+
+  // console.log(pollTimeAgo);
+  // console.log("voteTimeAgo", voteTimeAgo);
+  // console.log(votes);
 
   if (!author) return null;
 
@@ -92,6 +96,12 @@ const PollCard = ({ poll, users }: PollCardProps) => {
         </div>
       </div>
 
+      {hasVotes && (
+        <p className="mt-2 text-xs text-muted-foreground">
+          Abgestimmt {voteTimeAgo}
+        </p>
+      )}
+
       <form onSubmit={handleSubmit} className="mb-4">
         <p className="mt-4 mb-4">{question}</p>
 
@@ -120,7 +130,9 @@ const PollCard = ({ poll, users }: PollCardProps) => {
         <OpenEndedComments users={users} votes={votes} />
       )}
 
-      <p className="mt-2 text-right text-xs text-muted-foreground">{timeAgo}</p>
+      <p className="mt-2 text-xs text-right text-muted-foreground">
+        {pollTimeAgo}
+      </p>
     </>
   );
 };

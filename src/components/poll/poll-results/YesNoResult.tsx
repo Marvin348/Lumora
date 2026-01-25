@@ -22,7 +22,7 @@ const YesNoResult = ({ votes }: YesNoResultProps) => {
 
       <div className="w-full bg-gray-100 rounded-md overflow-hidden">
         <div
-          className="flex items-center justify-between w-full bg-gray-200 rounded-md px-2 py-1"
+          className="flex items-center justify-between gap-2 w-full bg-gray-200 rounded-md px-2 py-1"
           style={{ width: `${noPercent}%` }}
         >
           <span>Nein</span>
