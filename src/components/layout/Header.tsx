@@ -1,7 +1,9 @@
 import { Link } from "react-router";
-import { Menu, Search } from "lucide-react";
+import { Menu, Search, User } from "lucide-react";
 import Searchbar from "@/components/search/Searchbar";
 import { useState } from "react";
+import { useUsersContext } from "@/context/useUserContext";
+import UserMenu from "@/components/user/UserMenu";
 
 type HeaderProps = {
   onOpen: () => void;
@@ -9,14 +11,14 @@ type HeaderProps = {
 
 const Header = ({ onOpen }: HeaderProps) => {
   const [openSearchbar, setOpenSearchbar] = useState(false);
+  const users = useUsersContext();
 
   return (
-    <nav className="flex items-center justify-between sm:justify-normal gap-6">
+    <nav className="relative flex items-center justify-between sm:justify-normal gap-6">
       <button className="md:hidden cursor-pointer" onClick={onOpen}>
         <Menu />
       </button>
 
-      {/* Logo (verschwindet bei Search auf Mobile) */}
       {!openSearchbar && (
         <Link to="/">
           <h2 className="font-semibold text-3xl">Lumora</h2>
@@ -31,14 +33,20 @@ const Header = ({ onOpen }: HeaderProps) => {
         <Searchbar onClose={() => setOpenSearchbar(false)} />
       </div>
 
-      {!openSearchbar && (
-        <button
-          className="sm:hidden cursor-pointer"
-          onClick={() => setOpenSearchbar(true)}
-        >
-          <Search />
-        </button>
-      )}
+      <div className="flex items-center">
+        {!openSearchbar && (
+          <button
+            className="sm:hidden cursor-pointer"
+            onClick={() => setOpenSearchbar(true)}
+          >
+            <Search />
+          </button>
+        )}
+
+        <div>
+          <UserMenu />
+        </div>
+      </div>
     </nav>
   );
 };

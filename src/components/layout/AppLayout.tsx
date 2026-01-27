@@ -6,6 +6,7 @@ import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
 import { useUsers } from "@/hooks/useUsers";
 import { Spinner } from "@/components/ui/spinner";
 import { UserContext } from "@/context/useUserContext";
+import UserStats from "@/components/user/UserStats";
 
 const AppLayout = () => {
   const { data: users, isLoading, error } = useUsers();
@@ -17,7 +18,12 @@ const AppLayout = () => {
     setActiveUserId("u15");
   }, [setActiveUserId]);
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Spinner />
+      </div>
+    );
   if (error) return <div>Error</div>;
   if (!users) return null;
 
@@ -34,10 +40,15 @@ const AppLayout = () => {
             onOpen={isSidebarOpen}
           />
 
-          <main className="flex-1 p-6">
-            <div>
+          <main className="flex-1 p-6 xl:flex gap-6">
+            <div className="flex-1">
               <Outlet />
             </div>
+            <aside className="hidden xl:inline-block">
+              <div className="xl:sticky top-5 right-0">
+                <UserStats />
+              </div>
+            </aside>
           </main>
         </div>
       </div>

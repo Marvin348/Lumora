@@ -44,10 +44,6 @@ const PollCard = ({ poll, users }: PollCardProps) => {
   const myVote = votes.find((vote) => vote.userId === activeUserId);
   const voteTimeAgo = myVote ? getTimeAgo(myVote?.createdAt) : null;
 
-  // console.log(pollTimeAgo);
-  // console.log("voteTimeAgo", voteTimeAgo);
-  // console.log(votes);
-
   if (!author) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
