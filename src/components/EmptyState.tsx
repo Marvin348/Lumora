@@ -1,17 +1,33 @@
-import { BookmarkPlus } from "lucide-react";
+import { BookmarkPlus, BadgeCheck, Vote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
 
-const EmptyState = ({ text }: { text: string }) => {
+type EmptyStateProps = {
+  pages?: "bookmarks" | "voted" | "myPolls";
+};
 
-  // lookup func for votesPage, bookmarkPage, myPollsPage with icon and label
+const EmptyState = ({ pages }: EmptyStateProps) => {
+  const EMPTY_TYPES = {
+    bookmarks: {
+      label: "Du hast noch keine Polls gespeichert.",
+      icon: BookmarkPlus,
+    },
+    voted: { label: "Du hast noch nicht Angestimmt.", icon: BadgeCheck },
+    myPolls: { label: "Du hast noch keine Umfragen erstellt.", icon: Vote },
+  } as const;
+
+  const config = pages ? EMPTY_TYPES[pages] : null;
+  const Icon = config?.icon;
+
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="flex flex-col items-center gap-2 bg-gray-100 p-20 rounded-md">
-        <div className="bg-custom/50 rounded-md">
-          <BookmarkPlus size={150} color="white" />
+    <div className="flex items-center justify-center flex-1">
+      <div className="flex flex-col items-center justify-center gap-2 xl:w-full xl:h-full bg-gray-100 p-20 rounded-md">
+        <div className="bg-custom/50 rounded-md p-4">
+          {Icon && <Icon size={150} color="white" />}
         </div>
-        <p className="text-center">{text}</p>
+        <p className="text-center">
+          {pages ? EMPTY_TYPES[pages].label : "Keine Daten"}
+        </p>
         <Link to="/">
           <Button className="bg-custom text-white border-none hover:bg-custom/90 hover:text-white">
             Hier Entdecken

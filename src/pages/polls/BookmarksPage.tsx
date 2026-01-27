@@ -17,7 +17,7 @@ const BookmarksPage = () => {
   const sortedPolls = useSortedByDate(pollsWithMeta);
 
   if (bookmarkedPolls.length === 0)
-    return <EmptyState text="Du hast noch keine Polls gespeichert." />;
+    return <EmptyState pages="bookmarks" />;
 
   console.log(bookmarkedPolls);
 

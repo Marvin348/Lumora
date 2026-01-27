@@ -19,7 +19,7 @@ const Sidebar = ({ onClose, onOpen }: SidebarProps) => {
         onClick={onClose}
       ></div>
 
-      <aside
+      <nav
         className={`fixed top-0 bottom-0 w-65 bg-white p-4 px-6 rounded-r-md transition duration-400 ease-in-out z-50 ${
           onOpen ? "translate-x-0" : "-translate-x-full"
         } md:static min-h-screen md:translate-x-0 md:border-r md:rounded-none`}
@@ -32,7 +32,7 @@ const Sidebar = ({ onClose, onOpen }: SidebarProps) => {
             <X />
           </button>
         </div>
-        <nav className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8">
           {SIDEBAR_LINKS.map(({ to, label, icon: Icon }) => (
             <NavLink
               key={to}
@@ -47,8 +47,8 @@ const Sidebar = ({ onClose, onOpen }: SidebarProps) => {
               <Icon /> {label}
             </NavLink>
           ))}
-        </nav>
-      </aside>
+        </div>
+      </nav>
     </>
   );
 };

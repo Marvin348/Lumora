@@ -4,6 +4,7 @@ import { usePollsStore } from "@/store/polls/usePollsStore";
 import PollList from "@/components/poll/PollList";
 import { useSortVotedPollsByDate } from "@/hooks/useSortVotedPollsByDate";
 import { useUsersContext } from "@/context/useUserContext";
+import EmptyState from "@/components/EmptyState";
 
 const VotedPolls = () => {
   const users = useUsersContext();
@@ -19,6 +20,8 @@ const VotedPolls = () => {
     poll.votes.some((vote) => vote.userId === activeUserId),
   );
   const sortedPolls = useSortVotedPollsByDate(votedPolls, activeUserId);
+
+  if(votedPolls.length === 0) return <EmptyState pages="voted"/>
 
   return (
     <>

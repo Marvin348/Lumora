@@ -4,6 +4,7 @@ import { usePollsStore } from "@/store/polls/usePollsStore";
 import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
 import { useSortedByDate } from "@/hooks/useSortedByDate";
 import { useUsersContext } from "@/context/useUserContext";
+import EmptyState from "@/components/EmptyState";
 const MyPollsPage = () => {
   const users = useUsersContext();
 
@@ -16,6 +17,10 @@ const MyPollsPage = () => {
   const sortedPolls = useSortedByDate(pollsWithMeta);
 
   console.log("myPolls", myPolls);
+
+  if (myPolls.length === 0) {
+    return <EmptyState pages="myPolls" />;
+  }
 
   return (
     <>

@@ -2,8 +2,8 @@ import { Link } from "react-router";
 import { Menu, Search, User } from "lucide-react";
 import Searchbar from "@/components/search/Searchbar";
 import { useState } from "react";
-import { useUsersContext } from "@/context/useUserContext";
 import UserMenu from "@/components/user/UserMenu";
+import logo from "@/assets/Lumora.svg";
 
 type HeaderProps = {
   onOpen: () => void;
@@ -11,7 +11,6 @@ type HeaderProps = {
 
 const Header = ({ onOpen }: HeaderProps) => {
   const [openSearchbar, setOpenSearchbar] = useState(false);
-  const users = useUsersContext();
 
   return (
     <nav className="relative flex items-center justify-between sm:justify-normal gap-6">
@@ -21,7 +20,7 @@ const Header = ({ onOpen }: HeaderProps) => {
 
       {!openSearchbar && (
         <Link to="/">
-          <h2 className="font-semibold text-3xl">Lumora</h2>
+          <img src={logo} alt="Lumora" className="w-35" />
         </Link>
       )}
 

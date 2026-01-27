@@ -30,27 +30,30 @@ const AppLayout = () => {
 
   return (
     <UserContext.Provider value={users}>
-      <div>
+      <div className="min-h-screen flex flex-col">
         <Toaster position="top-right" />
+
         <header className="px-6 py-2 border-b">
           <Header onOpen={() => setIsSidebarOpen(true)} />
         </header>
 
-        <div className="flex">
+        <div className="flex flex-1">
           <Sidebar
             onClose={() => setIsSidebarOpen(false)}
             onOpen={isSidebarOpen}
           />
 
-          <main className="flex-1 p-6 xl:flex gap-6 max-w-[1400px] mx-auto">
-            <div className="flex-1">
+          <main className="flex-1 flex flex-col xl:flex-row p-6 gap-6 max-w-[1400px] mx-auto">
+            <div className="flex-1 flex flex-col">
               <Outlet />
             </div>
+
             <aside className="hidden xl:inline-block">
               <div className="xl:sticky top-5 right-0">
                 <UserStats />
               </div>
             </aside>
+
           </main>
         </div>
       </div>

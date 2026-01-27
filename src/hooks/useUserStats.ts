@@ -77,7 +77,7 @@ export const useUserStats = (): UserStats => {
     },
   );
 
-  let maxCount = -1;
+  let maxCount = 0;
   let mostActiveType: PollType | undefined = undefined;
 
   for (const [type, count] of Object.entries(totalActiveType)) {
