@@ -32,7 +32,7 @@ const RatingResult = ({ votes }: RatingResultProps) => {
 
             <div
               className="ml-2 bg-gray-200 rounded-md w-full px-2 py-1 text-xs font-medium"
-              style={{ width: ra.percent === 0 ? "10%" : `${ra.percent}%` }}
+              style={{ width: ra.percent === 0 ? "5%" : `${ra.percent}%` }}
             >
               {ra.percent}%
             </div>

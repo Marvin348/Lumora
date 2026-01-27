@@ -40,7 +40,7 @@ const AppLayout = () => {
             onOpen={isSidebarOpen}
           />
 
-          <main className="flex-1 p-6 xl:flex gap-6">
+          <main className="flex-1 p-6 xl:flex gap-6 max-w-[1400px] mx-auto">
             <div className="flex-1">
               <Outlet />
             </div>
