@@ -1,5 +1,6 @@
 import type { User } from "@/types/user";
 import { AVATARS } from "@/data/avatar";
+import { getInitials } from "@/utils/getInitials";
 
 type UserInfoProps = {
   user: User;
@@ -22,7 +23,7 @@ const UserInfo = ({ user, variant }: UserInfoProps) => {
         <div
           className={`flex items-center justify-center rounded-full bg-gray-100 ${isCentered ? "size-18" : "size-10"}`}
         >
-          AS
+          {getInitials(name)}
         </div>
       )}
       <div className={`min-w-0 ${isCentered ? "text-center" : ""}`}>
