@@ -13,7 +13,7 @@ const YesNoResult = ({ votes }: YesNoResultProps) => {
       <div className="w-full bg-gray-100 rounded-md overflow-hidden">
         <div
           className="flex items-center justify-between w-full rounded-md px-2 py-1 bg-gray-200"
-          style={{ width: `${yesPercent}%` }}
+          style={{ width: yesPercent === 0 ? "5%" : `${yesPercent}%` }}
         >
           <span>Ja</span>
           <span className="text-xs font-medium">{yesPercent}%</span>
@@ -23,7 +23,7 @@ const YesNoResult = ({ votes }: YesNoResultProps) => {
       <div className="w-full bg-gray-100 rounded-md overflow-hidden">
         <div
           className="flex items-center justify-between gap-2 w-full bg-gray-200 rounded-md px-2 py-1"
-          style={{ width: `${noPercent}%` }}
+          style={{ width: noPercent === 0 ? "5%" : `${noPercent}%` }}
         >
           <span>Nein</span>
           <span className="text-xs font-medium">{noPercent}%</span>

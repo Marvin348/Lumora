@@ -25,9 +25,15 @@ const UserInfo = ({ user, variant }: UserInfoProps) => {
           AS
         </div>
       )}
-      <div className={isCentered ? "text-center" : ""}>
-        <p className={`font-medium ${isCentered ? "text-lg" : "text-sm"}`}>{name}</p>
-        <p className="text-xs text-slate-800">{email}</p>
+      <div className={`min-w-0 ${isCentered ? "text-center" : ""}`}>
+        <p className={`font-medium ${isCentered ? "text-lg" : "text-sm"}`}>
+          {name}
+        </p>
+        <p
+          className={`text-xs truncate text-slate-800 ${isCentered ? "" : ""}`}
+        >
+          {email}
+        </p>
       </div>
     </>
   );

@@ -59,14 +59,14 @@ const PollCard = ({ poll, users }: PollCardProps) => {
   return (
     <>
       <div className="flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center min-w-0 gap-2">
           <UserInfo user={author} />
         </div>
 
         <div className="relative flex items-center">
           <Button
-            className="border-none shadow-none"
-            size="icon-lg"
+            className="border-none shadow-none shrink-0"
+            size="icon-sm"
             onClick={() => toggleBookmark(id)}
           >
             <Bookmark
@@ -76,8 +76,8 @@ const PollCard = ({ poll, users }: PollCardProps) => {
             />
           </Button>
           <Button
-            className="border-none shadow-none"
-            size="icon-lg"
+            className="border-none shadow-none shrink-0"
+            size="icon-sm"
             onClick={() => setOpenDropdown((prev) => !prev)}
           >
             <EllipsisVertical className="!size-5" />
