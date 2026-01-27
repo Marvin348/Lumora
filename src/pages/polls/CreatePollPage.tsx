@@ -5,6 +5,7 @@ import { usePollsStore } from "@/store/polls/usePollsStore";
 import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
 import { useState } from "react";
 import type { PollType } from "@/types/pollType";
+import { showPollCreated } from "@/utils/toast";
 const CreatePollPage = () => {
   const [questinInput, setQuestionInput] = useState("");
   const [selectedType, setSelectedType] = useState<PollType | null>(null);
@@ -46,6 +47,7 @@ const CreatePollPage = () => {
       });
     }
     setQuestionInput("");
+    showPollCreated();
   };
 
   const disabled = selectedType === "single_choice" && optionDraft.length < 2;

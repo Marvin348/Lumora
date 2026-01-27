@@ -13,6 +13,7 @@ import type { User } from "@/types/user";
 import PollDropdown from "@/components/poll/PollDropdown";
 import { usePollsStore } from "@/store/polls/usePollsStore";
 import { getTimeAgo } from "@/utils/getTimeAgo";
+import { showPollDeleted, showVoted } from "@/utils/toast";
 
 type PollCardProps = {
   poll: PollsWithMeta;
@@ -54,6 +55,7 @@ const PollCard = ({ poll, users }: PollCardProps) => {
     if (selectedValue !== null) {
       addVote({ pollId: id, userId: activeUserId, value: selectedValue });
     }
+    showVoted();
   };
 
   return (
@@ -86,7 +88,10 @@ const PollCard = ({ poll, users }: PollCardProps) => {
           {openDropdown && (
             <PollDropdown
               canDelete={isMyPoll}
-              onDelete={() => deletePolls(id)}
+              onDelete={() => {
+                deletePolls(id);
+                showPollDeleted();
+              }}
             />
           )}
         </div>

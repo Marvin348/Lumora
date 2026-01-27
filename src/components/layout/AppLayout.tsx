@@ -7,6 +7,7 @@ import { useUsers } from "@/hooks/useUsers";
 import { Spinner } from "@/components/ui/spinner";
 import { UserContext } from "@/context/useUserContext";
 import UserStats from "@/components/user/UserStats";
+import { Toaster } from "react-hot-toast";
 
 const AppLayout = () => {
   const { data: users, isLoading, error } = useUsers();
@@ -30,6 +31,7 @@ const AppLayout = () => {
   return (
     <UserContext.Provider value={users}>
       <div>
+        <Toaster position="top-right" />
         <header className="px-6 py-2 border-b">
           <Header onOpen={() => setIsSidebarOpen(true)} />
         </header>
