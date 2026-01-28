@@ -1,73 +1,91 @@
-# React + TypeScript + Vite
+# ❇️ Lumora
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Lumora is a modern polling platform where users can create polls, vote, bookmark interesting polls, and track their personal activity through real-time user statistics.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
+[Live Demo]()
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📌 Features
+- 🗳️ Create different poll types
+- 🔍 Search polls by title or author
+- 🧩 Filter polls by type
+- ⭐ Bookmark polls
+- 📊 Live vote result calculations
+- 🧠 Personalized User Stats
+- 💾 LocalStorage persistence (simulated backend)
+- 📱 Fully responsive (mobile & desktop)
+- 🧭 Multi-page routing with layout system
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
+- **TypeScript**
+- **React**
+- **Zustand** – global state management
+- **TanStack Query** – data fetching & caching
+- **Tailwind CSS** – utility-first styling
+- **shadcn/ui** – accessible UI components
+- **React Router**
+- **LocalStorage** – persistence layer
+- **Lucide Icons**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📚 What I Learned
+This project focused heavily on **real-world frontend thinking**, not just UI.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+**🧠 Derived & Enriched Data**
+- building **derived UI arrays** (pollsWithMeta, votesWithUser)
+- enriching raw data with user info and vote data
+This improved my understanding of data flow and how frontend apps often work with computed data rather than raw server responses.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**🧩 State Architecture & Separation**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Instead of creating separate stores for “my polls” or “my votes”, I:
+- stored **all polls and votes globally**
+- derived user-specific views inside components
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**⚡ Temporary vs Submitted State**
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+I improved my understanding of handling:
+- temporary UI state (form inputs, selections)
+- separating it from committed state
+- only persisting data on explicit actions like submitÏ
+
+**🔄 Sorting & Data Transformation**
+
+I gained deeper experience with:
+
+- map, filter, reduce, find, some
+- sorting by dynamic properties (poll date vs vote date)
+- counting grouped values (poll type statistics)
+- building result calculation utilities
+
+**🧠 Realistic Data Handling**
+
+I intentionally simulated backend behavior by:
+
+- fetching users separately
+- handling loading and error states
+- combining server-like data with client state
+
+This helped me better understand how frontend apps integrate multiple data sources.
+
+**🧱 Component Architecture**
+- Layout-based routing
+- Shared layout with conditional UI (sticky user stats)
+- Context for globally needed server data
+- Reusable UI components with variant behavior
+
+
+## Screenshots
+
+### Desktop
+![Dashboard](./screenshots/lumora-desktop.png)
+![Create](./screenshots/lumora-desktop-create.png)
+
+### Mobile
+![Mobile Screenshot](./screenshots/lumora-mobile.png)
+
+
+## 📝 Note
+The project simulates real-world frontend architecture with derived UI data, global state, server-style data fetching, and user-focused features — all built with scalable patterns.
