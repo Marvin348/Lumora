@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Menu, Search, User } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import Searchbar from "@/components/search/Searchbar";
 import { useState } from "react";
 import UserMenu from "@/components/user/UserMenu";
