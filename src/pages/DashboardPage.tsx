@@ -6,7 +6,6 @@ import Filterbar from "@/components/filter/Filterbar";
 import { useFilterStore } from "@/store/filter/useFilterStore";
 import { useFilteredPolls } from "@/hooks/useFilteredPolls";
 import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
-import { useVotesStore } from "@/store/votes/useVotesStore";
 import { usePollsStore } from "@/store/polls/usePollsStore";
 import { usePollsWithMeta } from "@/hooks/usePollsWithMeta";
 import { useSortedByDate } from "@/hooks/useSortedByDate";
@@ -16,15 +15,13 @@ const DashboardPage = () => {
   const users = useUsersContext();
 
   const polls = usePollsStore((state) => state.polls);
-  const pollsWithMeta = usePollsWithMeta(polls, users ?? []);
-
-  const votes = useVotesStore((state) => state.votes);
+  const pollsWithMeta = usePollsWithMeta(polls);
 
   const filter = useFilterStore((state) => state.filter);
   const bookmark = useBookmarkStore((state) => state.bookmark);
 
   const activeUserId = useActiveUserStore((state) => state.activeUserId);
-  const activeUser = users?.find((user) => user.id === activeUserId);
+  const activeUser = users.find((user) => user.id === activeUserId);
 
   const searchQuery = useSearchStore((state) => state.searchQuery);
 
@@ -44,7 +41,7 @@ const DashboardPage = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-6">
-        <PollList pollsWithMeta={filteredPolls} users={users} />
+        <PollList pollsWithMeta={filteredPolls} />
       </div>
     </>
   );

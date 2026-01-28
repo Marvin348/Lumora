@@ -8,8 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
 import PollInput from "@/components/poll/poll-input/PollInput";
 import PollResult from "@/components/poll/poll-results/PollResult";
-import OpenEndedComments from "./OpenEndedComments";
-import type { User } from "@/types/user";
+import OpenEndedComments from "@/components/poll/OpenEndedComments";
 import PollDropdown from "@/components/poll/PollDropdown";
 import { usePollsStore } from "@/store/polls/usePollsStore";
 import { getTimeAgo } from "@/utils/getTimeAgo";
@@ -17,10 +16,9 @@ import { showPollDeleted, showVoted } from "@/utils/toast";
 
 type PollCardProps = {
   poll: PollsWithMeta;
-  users: User[];
 };
 
-const PollCard = ({ poll, users }: PollCardProps) => {
+const PollCard = ({ poll }: PollCardProps) => {
   const { question, createdAt, type, votes, author, id, options } = poll;
   const [openDropdown, setOpenDropdown] = useState(false);
   const activeUserId = useActiveUserStore((state) => state.activeUserId);
@@ -122,14 +120,12 @@ const PollCard = ({ poll, users }: PollCardProps) => {
             className="mt-4 p-2 py-4 border-none rounded-md text-sm bg-custom text-white hover:bg-custom/90 hover:text-white"
             size="sm"
           >
-            Bestätigen
+            Abstimmen
           </Button>
         )}
       </form>
 
-      {type === "open_ended" && (
-        <OpenEndedComments users={users} votes={votes} />
-      )}
+      {type === "open_ended" && <OpenEndedComments votes={votes} />}
 
       <p className="mt-2 text-xs text-right text-muted-foreground">
         {pollTimeAgo}

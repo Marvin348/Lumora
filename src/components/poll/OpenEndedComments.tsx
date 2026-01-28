@@ -1,4 +1,3 @@
-import type { User } from "@/types/user";
 import type { Vote } from "@/types/vote";
 import { ChevronUp } from "lucide-react";
 import { useState } from "react";
@@ -7,13 +6,14 @@ import type { VotesWithUser } from "@/types/votesWithUser";
 import { useOpenEndedComments } from "@/hooks/useOpenEndedComments";
 import { getTimeAgo } from "@/utils/getTimeAgo";
 import { useSortedByDate } from "@/hooks/useSortedByDate";
+import { useUsersContext } from "@/context/useUserContext";
 
 type OpenEndedCommentsProps = {
-  users: User[];
   votes: Vote[];
 };
 
-const OpenEndedComments = ({ users, votes }: OpenEndedCommentsProps) => {
+const OpenEndedComments = ({ votes }: OpenEndedCommentsProps) => {
+  const users = useUsersContext();
   const [showComments, setShowComments] = useState(false);
   const toggleComments = () => setShowComments((prev) => !prev);
 
@@ -31,7 +31,6 @@ const OpenEndedComments = ({ users, votes }: OpenEndedCommentsProps) => {
   const { visibleCount, setVisibleCount, visibleComments, COMMENTS_PER_PAGE } =
     useOpenEndedComments(sortedComments);
 
-  // console.log("votesWithUser", votesWithUser);
 
   return (
     <>

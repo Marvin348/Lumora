@@ -1,9 +1,10 @@
+import { useUsersContext } from "@/context/useUserContext";
 import { useVotesStore } from "@/store/votes/useVotesStore";
 import type { Poll } from "@/types/poll";
 import type { PollsWithMeta } from "@/types/pollsWithMeta";
-import type { User } from "@/types/user";
 
-export const usePollsWithMeta = (polls: Poll[], users: User[]) => {
+export const usePollsWithMeta = (polls: Poll[]) => {
+  const users = useUsersContext();
   const votes = useVotesStore((state) => state.votes);
 
   const pollsWithMeta: PollsWithMeta[] = polls.map((poll) => {
