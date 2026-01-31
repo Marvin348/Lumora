@@ -1,27 +1,18 @@
 import PollList from "@/components/poll/PollList";
-import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
 import { useSearchStore } from "@/store/search/useSearchStore";
 import { useSearchPolls } from "@/hooks/useSearchPolls";
 import Filterbar from "@/components/filter/Filterbar";
 import { useFilterStore } from "@/store/filter/useFilterStore";
 import { useFilteredPolls } from "@/hooks/useFilteredPolls";
-import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
 import { usePollsStore } from "@/store/polls/usePollsStore";
 import { usePollsWithMeta } from "@/hooks/usePollsWithMeta";
 import { useSortedByDate } from "@/hooks/useSortedByDate";
-import { useUsersContext } from "@/context/useUserContext";
 
 const DashboardPage = () => {
-  const users = useUsersContext();
-
   const polls = usePollsStore((state) => state.polls);
   const pollsWithMeta = usePollsWithMeta(polls);
 
   const filter = useFilterStore((state) => state.filter);
-  const bookmark = useBookmarkStore((state) => state.bookmark);
-
-  const activeUserId = useActiveUserStore((state) => state.activeUserId);
-  const activeUser = users.find((user) => user.id === activeUserId);
 
   const searchQuery = useSearchStore((state) => state.searchQuery);
 

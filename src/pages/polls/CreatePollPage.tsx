@@ -13,7 +13,6 @@ const CreatePollPage = () => {
 
   const activeUserId = useActiveUserStore((state) => state.activeUserId);
 
-  const polls = usePollsStore((state) => state.polls);
   const createPoll = usePollsStore((state) => state.createPoll);
 
   const addOptions = (text: string) => {
