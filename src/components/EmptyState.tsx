@@ -12,7 +12,7 @@ const EmptyState = ({ pages }: EmptyStateProps) => {
       label: "Du hast noch keine Polls gespeichert.",
       icon: BookmarkPlus,
     },
-    voted: { label: "Du hast noch nicht Angestimmt.", icon: BadgeCheck },
+    voted: { label: "Du hast noch nicht Abgestimmt.", icon: BadgeCheck },
     myPolls: { label: "Du hast noch keine Umfragen erstellt.", icon: Vote },
   } as const;
 

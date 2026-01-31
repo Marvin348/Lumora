@@ -28,8 +28,6 @@ const UserStats = () => {
     single_choice: "Einzelauswahl",
   };
 
-  console.log(activeUser);
-  console.log(useUserStats());
   return (
     <div className="border rounded-md bg-gray-50">
       <div className="p-4">

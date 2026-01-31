@@ -13,7 +13,7 @@ const Header = ({ onOpen }: HeaderProps) => {
   const [openSearchbar, setOpenSearchbar] = useState(false);
 
   return (
-    <nav className="relative flex items-center justify-between sm:justify-normal gap-6">
+    <nav className="relative flex items-center justify-between sm:justify-normal gap-6 h-10">
       <button className="md:hidden cursor-pointer" onClick={onOpen}>
         <Menu />
       </button>

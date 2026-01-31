@@ -16,7 +16,6 @@ const BookmarksPage = () => {
 
   if (bookmarkedPolls.length === 0) return <EmptyState pages="bookmarks" />;
 
-  console.log(bookmarkedPolls);
 
   return (
     <>

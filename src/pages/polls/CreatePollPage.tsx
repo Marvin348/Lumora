@@ -52,9 +52,6 @@ const CreatePollPage = () => {
 
   const disabled = selectedType === "single_choice" && optionDraft.length < 2;
 
-  console.log(polls);
-  console.log(selectedType);
-  console.log("optionDraft", optionDraft);
   return (
     <>
       <h2 className="text-2xl font-semibold">Umfrage erstellen</h2>

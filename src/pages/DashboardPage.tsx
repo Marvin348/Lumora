@@ -29,11 +29,6 @@ const DashboardPage = () => {
   const searchedPolls = useSearchPolls(searchQuery, sortedPolls);
   const filteredPolls = useFilteredPolls(searchedPolls, filter);
 
-  console.log("enriched", pollsWithMeta);
-  console.log("activeUser", activeUser);
-  console.log("filter", filter);
-  console.log("bookmark", bookmark);
-
   return (
     <>
       <div className="mb-12">
