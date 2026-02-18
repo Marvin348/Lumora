@@ -1,15 +1,12 @@
-import { usePollsStore } from "@/store/polls/usePollsStore";
-import { useVotesStore } from "@/store/votes/useVotesStore";
-import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
-import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
+import { useAppStore } from "@/store";
 import type { PollType } from "@/types/pollType";
 import type { UserStats } from "@/types/userStats";
 
 export const useUserStats = (): UserStats => {
-  const activeUserId = useActiveUserStore((state) => state.activeUserId);
-  const polls = usePollsStore((state) => state.polls);
-  const votes = useVotesStore((state) => state.votes);
-  const bookmark = useBookmarkStore((state) => state.bookmark);
+  const activeUserId = useAppStore((state) => state.activeUserId);
+  const polls = useAppStore((state) => state.polls);
+  const votes = useAppStore((state) => state.votes);
+  const bookmark = useAppStore((state) => state.bookmark);
 
   const pollsCreated = polls.filter(
     (poll) => poll.authorId === activeUserId,

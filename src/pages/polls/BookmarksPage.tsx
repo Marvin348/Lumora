@@ -1,14 +1,13 @@
 import PollList from "@/components/poll/PollList";
 import { usePollsWithMeta } from "@/hooks/usePollsWithMeta";
-import { usePollsStore } from "@/store/polls/usePollsStore";
-import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
+import { useAppStore } from "@/store";
 import EmptyState from "@/components/EmptyState";
 import { useSortedByDate } from "@/hooks/useSortedByDate";
 
 const BookmarksPage = () => {
-  const polls = usePollsStore((state) => state.polls);
+  const polls = useAppStore((state) => state.polls);
 
-  const bookmark = useBookmarkStore((state) => state.bookmark);
+  const bookmark = useAppStore((state) => state.bookmark);
   const bookmarkedPolls = polls.filter((poll) => bookmark.includes(poll.id));
 
   const pollsWithMeta = usePollsWithMeta(bookmarkedPolls);
