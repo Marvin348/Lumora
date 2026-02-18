@@ -1,7 +1,8 @@
 import { POLL_TYPE_OPTIONS } from "@/constants/filter-options";
 import { Funnel } from "lucide-react";
 import { useState } from "react";
-import { useFilterStore, type Filter } from "@/store/filter/useFilterStore";
+import type { Filter } from "@/store/slices/filter";
+import { useAppStore } from "@/store";
 import { Button } from "@/components/ui/button";
 
 type FilterbarProps = {
@@ -11,8 +12,8 @@ type FilterbarProps = {
 const Filterbar = ({ filter }: FilterbarProps) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const setFilter = useFilterStore((state) => state.setFilter);
-  const clearFilter = useFilterStore((state) => state.clearFilter);
+  const setFilter = useAppStore((state) => state.setFilter);
+  const clearFilter = useAppStore((state) => state.clearFilter);
 
   const toggleFilter = () => setIsFilterOpen((prev) => !prev);
 

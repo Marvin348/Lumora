@@ -1,6 +1,6 @@
 import { useUserStats } from "@/hooks/useUserStats";
 import UserInfo from "@/components/user/UserInfo";
-import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
+import { useAppStore } from "@/store";
 import { getTimeAgo } from "@/utils/getTimeAgo";
 import { Flame, Clock8 } from "lucide-react";
 import type { PollType } from "@/types/pollType";
@@ -16,7 +16,7 @@ const UserStats = () => {
     mostActiveType,
   } = useUserStats();
   const users = useUsersContext();
-  const activeUserId = useActiveUserStore((state) => state.activeUserId);
+  const activeUserId = useAppStore((state) => state.activeUserId);
   const activeUser = users.find((user) => user.id === activeUserId);
 
   if (!activeUser) return <div>Kein User aktiv</div>;

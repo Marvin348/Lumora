@@ -1,19 +1,24 @@
+import type { StateCreator } from "zustand";
+import type { AppStore } from "@/store";
 import type { PollType } from "@/types/pollType";
-import { create } from "zustand";
 
 export type Filter = {
   category?: PollType;
 };
 
-type FilterStore = {
+export type FilterSlice = {
   filter: Filter;
   setFilter: (filter: Filter) => void;
   clearFilter: () => void;
 };
 
-export const useFilterStore = create<FilterStore>()((set) => ({
+export const createFilterSlice: StateCreator<AppStore, [], [], FilterSlice> = (
+  set,
+) => ({
   filter: {},
+
   setFilter: (filter) =>
     set((state) => ({ filter: { ...state.filter, ...filter } })),
+
   clearFilter: () => set({ filter: {} }),
-}));
+});

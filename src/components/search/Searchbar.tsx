@@ -1,6 +1,7 @@
 import { Search, X } from "lucide-react";
 import { useState } from "react";
-import { useSearchStore } from "@/store/search/useSearchStore";
+import { useAppStore } from "@/store";
+useAppStore
 
 type SearchbarProps = {
   onClose: () => void;
@@ -8,7 +9,7 @@ type SearchbarProps = {
 
 const Searchbar = ({ onClose }: SearchbarProps) => {
   const [searchInput, setSearchInput] = useState("");
-  const setSearchQuery = useSearchStore((state) => state.setSearchQuery);
+  const setSearchQuery = useAppStore((state) => state.setSearchQuery);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

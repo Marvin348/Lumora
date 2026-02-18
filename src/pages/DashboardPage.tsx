@@ -1,20 +1,18 @@
 import PollList from "@/components/poll/PollList";
-import { useSearchStore } from "@/store/search/useSearchStore";
 import { useSearchPolls } from "@/hooks/useSearchPolls";
 import Filterbar from "@/components/filter/Filterbar";
-import { useFilterStore } from "@/store/filter/useFilterStore";
+import { useAppStore } from "@/store";
 import { useFilteredPolls } from "@/hooks/useFilteredPolls";
-import { usePollsStore } from "@/store/polls/usePollsStore";
 import { usePollsWithMeta } from "@/hooks/usePollsWithMeta";
 import { useSortedByDate } from "@/hooks/useSortedByDate";
 
 const DashboardPage = () => {
-  const polls = usePollsStore((state) => state.polls);
+  const polls = useAppStore((state) => state.polls);
   const pollsWithMeta = usePollsWithMeta(polls);
 
-  const filter = useFilterStore((state) => state.filter);
+  const filter = useAppStore((state) => state.filter);
 
-  const searchQuery = useSearchStore((state) => state.searchQuery);
+  const searchQuery = useAppStore((state) => state.searchQuery);
 
   const sortedPolls = useSortedByDate(pollsWithMeta);
   const searchedPolls = useSearchPolls(searchQuery, sortedPolls);
