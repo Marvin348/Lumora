@@ -17,38 +17,6 @@ export type PollSlice = {
   deletePoll: (id: string) => void;
 };
 
-// export const usePollsStore = create<PollsStore>()(
-//   persist(
-//     (set) => ({
-//       polls: mockPolls,
-//       createPoll: (input) =>
-//         set((state) => {
-//           const newPoll: Poll = {
-//             id: crypto.randomUUID(),
-//             authorId: input.authorId,
-//             question: input.question,
-//             type: input.type,
-//             options: input.options,
-//             createdAt: new Date().toISOString(),
-//           };
-
-//           return {
-//             polls: [...state.polls, newPoll],
-//           };
-//         }),
-
-//       deletePoll: (id) =>
-//         set((state) => ({
-//           polls: state.polls.filter((poll) => poll.id !== id),
-//         })),
-//     }),
-//     {
-//       name: "polls",
-//       partialize: (state) => ({ polls: state.polls }),
-//     },
-//   ),
-// );
-
 export const createPollsSlice: StateCreator<AppStore, [], [], PollSlice> = (
   set,
 ) => ({
