@@ -1,19 +1,19 @@
 import SingleChoiceOptions from "@/components/poll/poll-options/SingleChoiceOptions";
 import { Button } from "@/components/ui/button";
 import { POLL_TYPE_OPTIONS } from "@/constants/filter-options";
-import { usePollsStore } from "@/store/polls/usePollsStore";
-import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
+useAppStore;
 import { useState } from "react";
 import type { PollType } from "@/types/pollType";
 import { showPollCreated } from "@/utils/toast";
+import { useAppStore } from "@/store";
 const CreatePollPage = () => {
   const [questinInput, setQuestionInput] = useState("");
   const [selectedType, setSelectedType] = useState<PollType | null>(null);
   const [optionDraft, setOptionDraft] = useState<string[]>([]);
 
-  const activeUserId = useActiveUserStore((state) => state.activeUserId);
+  const activeUserId = useAppStore((state) => state.activeUserId);
 
-  const createPoll = usePollsStore((state) => state.createPoll);
+  const createPoll = useAppStore((state) => state.createPoll);
 
   const addOptions = (text: string) => {
     const trimmed = text.trim();

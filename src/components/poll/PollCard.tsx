@@ -2,15 +2,12 @@ import UserInfo from "@/components/user/UserInfo";
 import type { PollsWithMeta } from "@/types/pollsWithMeta";
 import { Bookmark, EllipsisVertical } from "lucide-react";
 import { useState } from "react";
-import { useVotesStore } from "@/store/votes/useVotesStore";
-import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
 import { Button } from "@/components/ui/button";
-import { useBookmarkStore } from "@/store/bookmark/useBookmarkStore";
 import PollInput from "@/components/poll/poll-input/PollInput";
 import PollResult from "@/components/poll/poll-results/PollResult";
 import OpenEndedComments from "@/components/poll/OpenEndedComments";
 import PollDropdown from "@/components/poll/PollDropdown";
-import { usePollsStore } from "@/store/polls/usePollsStore";
+import { useAppStore } from "@/store";
 import { getTimeAgo } from "@/utils/getTimeAgo";
 import { showPollDeleted, showVoted } from "@/utils/toast";
 
@@ -21,13 +18,13 @@ type PollCardProps = {
 const PollCard = ({ poll }: PollCardProps) => {
   const { question, createdAt, type, votes, author, id, options } = poll;
   const [openDropdown, setOpenDropdown] = useState(false);
-  const activeUserId = useActiveUserStore((state) => state.activeUserId);
+  const activeUserId = useAppStore((state) => state.activeUserId);
 
-  const addVote = useVotesStore((state) => state.addVote);
-  const deletePolls = usePollsStore((state) => state.deletePoll);
+  const addVote = useAppStore((state) => state.addVote);
+  const deletePolls = useAppStore((state) => state.deletePoll);
 
-  const isBookmarked = useBookmarkStore((state) => state.bookmark.includes(id));
-  const toggleBookmark = useBookmarkStore((state) => state.toggleBookmark);
+  const isBookmarked = useAppStore((state) => state.bookmark.includes(id));
+  const toggleBookmark = useAppStore((state) => state.toggleBookmark);
 
   const [selectedValue, setSelectedValue] = useState<
     string | number | boolean | null

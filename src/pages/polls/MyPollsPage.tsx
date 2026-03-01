@@ -1,13 +1,12 @@
 import PollList from "@/components/poll/PollList";
 import { usePollsWithMeta } from "@/hooks/usePollsWithMeta";
-import { usePollsStore } from "@/store/polls/usePollsStore";
-import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
+import { useAppStore } from "@/store";
 import { useSortedByDate } from "@/hooks/useSortedByDate";
 import EmptyState from "@/components/EmptyState";
 const MyPollsPage = () => {
 
-  const polls = usePollsStore((state) => state.polls);
-  const activeUserId = useActiveUserStore((state) => state.activeUserId);
+  const polls = useAppStore((state) => state.polls);
+  const activeUserId = useAppStore((state) => state.activeUserId);
 
   const myPolls = polls.filter((poll) => poll.authorId === activeUserId);
 

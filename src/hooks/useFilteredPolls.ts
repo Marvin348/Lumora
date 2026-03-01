@@ -1,4 +1,4 @@
-import type { Filter } from "@/store/filter/useFilterStore";
+import type { Filter } from "@/store/slices/filter";
 import type { PollsWithMeta } from "@/types/pollsWithMeta";
 
 export const useFilteredPolls = (

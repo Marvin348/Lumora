@@ -1,13 +1,12 @@
 import { usePollsWithMeta } from "@/hooks/usePollsWithMeta";
-import { useActiveUserStore } from "@/store/activeUser/useActiveUserStore";
-import { usePollsStore } from "@/store/polls/usePollsStore";
+import { useAppStore } from "@/store";
 import PollList from "@/components/poll/PollList";
 import { useSortVotedPollsByDate } from "@/hooks/useSortVotedPollsByDate";
 import EmptyState from "@/components/EmptyState";
 
 const VotedPolls = () => {
-  const polls = usePollsStore((state) => state.polls);
-  const activeUserId = useActiveUserStore((state) => state.activeUserId);
+  const polls = useAppStore((state) => state.polls);
+  const activeUserId = useAppStore((state) => state.activeUserId);
 
   if (!activeUserId) return <div>Kein User aktiv</div>;
 
